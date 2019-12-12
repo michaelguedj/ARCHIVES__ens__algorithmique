@@ -1,0 +1,86 @@
+
+
+\blue{
+\begin{fDefinition}[\textsc{Arrêt}]
+$\\$
+\noindent
+\underline{Entrées :}
+\begin{enumerate}
+\item \textup{\texttt{<Prog>}} : le code source d'un programme \textup{\texttt{Prog}} ;
+\item \textup{\texttt{x}} : une entrée pour \textup{\texttt{Prog}}.
+\end{enumerate}
+\underline{Sortie :} \textup{\texttt{Prog(x)}} s'arrête-t-il ?
+\end{fDefinition}
+}
+
+\blue{
+\begin{fTheorem}[Turing]
+\textsc{Arrêt} est indécidable.
+\end{fTheorem}
+}
+\begin{proof}[Preuve]
+(Par l'absurde).
+On suppose qu'\textsc{Arrêt} est décidable ; i.e.
+il existe un programme, 
+soit \texttt{Halt}, qui décide le problème de l'arrêt ;
+i.e., pour tout programme \texttt{Prog} de code source \texttt{<Prog>}, 
+pour toute entrée \texttt{x} de \texttt{Prog} : 
+\begin{itemize}
+\item
+	\texttt{Prog(x)} s'arrête $\iff$
+	\texttt{Halt(<Prog>, x)} répond \texttt{Vrai} ;
+\item
+	\texttt{Prog(x)} ne s'arrête pas $\iff$
+	\texttt{Halt(<Prog>, x)} répond \texttt{Faux}.
+\end{itemize}
+
+On considère le programme \texttt{Diagonale} ci-après :
+
+\begin{verbatim}
+Diagonale(y):
+    Si Halt(y, y) = Vrai :
+        opérer une boucle infinie
+    Sinon
+        retourner "toto"
+    Fin Si
+\end{verbatim}
+
+Nous considérons l'exécution : \texttt{Diagonale(<Diagonale>)}.
+\begin{enumerate}[(a)]
+\item \underline{Cas 1 : \texttt{Halt(<Diagonale>, <Diagonale>) = Vrai}}
+
+D'après le code de \texttt{Diagonale}, il suit que 
+\texttt{Diagonale(<Diagonale>)} ne s'arrête pas, donc que 
+\texttt{Halt(<Diagonale>, <Diagonale>)} répond \texttt{Faux}.
+
+\item \underline{Cas 2 : \texttt{Halt(<Diagonale>, <Diagonale>) = Faux}}
+
+D'après le code de \texttt{Diagonale}, il suit que 
+\texttt{Diagonale(<Diagonale>)} s'arrête, donc que 
+\texttt{Halt(<Diagonale>, <Diagonale>)} répond \texttt{Vrai}.
+\end{enumerate}
+%
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\Section{\textsc{Ramasse-miette}}
+%\begin{definition*}[\textsc{Ramasse-miette}]
+%$~$
+%
+%\noindent
+%\underline{Entrées :}
+%\begin{enumerate}
+%\item \texttt{Prog} : un programme;
+%\item \texttt{x} : une entrée pour \texttt{Prog}.
+%\end{enumerate}
+%\underline{Sortie :} \texttt{Prog(x)} s'arrête-t-il ?
+%\end{definition*}
+%
+%\begin{theoreme*}[Turing]
+%\textsc{Arrêt} est indécidable.
+%\end{theoreme*}
+%%
+%\begin{proof}[Preuve]
+%\end{proof}
+
+

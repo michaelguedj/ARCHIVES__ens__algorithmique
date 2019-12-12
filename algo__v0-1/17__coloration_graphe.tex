@@ -1,0 +1,88 @@
+
+
+\subsection{Définition du problème}
+%%%
+%%%
+\blue{
+\begin{fDefinition}[Problème de la coloration de graphe]
+$~$
+\begin{itemize} 
+	\item \textup{Entrée.}
+		\begin{itemize}
+			\item[] Un graphe $G$, non orienté sans boucle.
+		\end{itemize}
+	\item \textup{Problème.}
+		\begin{itemize}
+			\item[] Trouver le plus petit entier $k$, tel que $G$ soit $k$-colorable.
+		\end{itemize}
+\end{itemize}
+\end{fDefinition}
+}
+
+\blue{
+\begin{fTheorem}
+Le problème de la coloration de graphe est NP-hard. 
+\end{fTheorem}
+}
+
+\begin{proof}
+Admis.
+\end{proof}
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
+\subsection{Coloration gloutonne}
+%%%
+%%%
+
+\begin{algorithm}[H]
+\caption{$\algo{Greedy\_Colouring}( G=(S, A) )$ 
+	tel que $S=\{s_{i} : i\in\{0, ..., n-1\} \}$}
+\begin{algorithmic}[1]
+\State $color \gets$ un dictionnaire vérifiant : $\forall s\in S, color[s]=-1$
+\For{$i\gets 0, .., n-1$}
+	\State $C_i \gets \{color[s_j] : (s_i, s_j)\in A\}$ 
+	\State $color[s_i] \gets \min \{c\in\mathbb{N} : c\notin C_i \}$
+		\green{\Comment{Le plus petit entier positif n'appartenant pas à $C_i$}}
+\EndFor
+\State\Return $color$
+\end{algorithmic}
+\end{algorithm}
+
+%Complexité : $O(n^2)$
+
+% \blue{
+% \begin{fTheorem}
+% L'algorithme $\textsc{Greedy\_Colouring}$ donne une coloration de graphe.
+% \end{fTheorem}
+% }
+
+% \blue{
+% \begin{fLemma} Après déroulement de $\textsc{Greedy\_Colouring}$, tout sommet est coloré.
+% \end{fLemma}
+% }
+
+% Autrement dit : $\forall s\in S, color[s]>-1$.
+
+% \begin{proof}
+% L'algorithme assure, que le dictionnaire retourné $color$, vérifie :
+% $$\forall s\in S, color[s]\in \mathbb{N}$$
+% \end{proof}
+
+
+% \blue{
+% \begin{fLemma}
+% $\forall i\not=j, color[s_i]\not= color[s_j]$
+% \end{fLemma}
+% }
+
+% \begin{proof}
+% Par l'absurde, supposons $i$ et $j$ tels que $color[v_i]=color[v_j]$.
+% Sans perte de généralité, supposons $i>j$. Contradiction d'après la proposition 1.
+% \end{proof}
+
+
+

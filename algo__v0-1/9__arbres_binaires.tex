@@ -1,0 +1,207 @@
+
+\subsection{Définitions préliminaires}
+
+\blue{
+\begin{fDefinition}[Type \code{Noeud\_Binaire}]
+Le type \textup{\code{Noeud\_Binaire}} est un triplet $(id, val, f_g, f_d)$ tel que :
+\begin{enumerate}[(i)]
+\item 
+$id$ est un identifiant à valeur dans $\mathbb{N}\cup\{-1\}$ ;
+\item 
+$val\in V$ (valeur du noeud) ; (par exemple $V=\mathbb{R}$) ;
+\item
+$f_g$ (fils gauche) est de type \textup{\code{Noeud\_Binaire}} ;
+\item
+De même pour $f_d$ (fils droit).
+\end{enumerate}
+\end{fDefinition}
+}
+
+On considère le prédicat $Null$, définit sur \code{Noeud\_Binaire} par : 
+$$
+Null(n) \iff n.id = -1
+$$
+
+Soint un ensemble d'éléments de type \code{Noeud\_Binaire}, 
+on pose :
+$$parent(s):=\{s' : s'.f_g = s \text{ ou } s'.f_d = s\}$$
+
+\blue{
+\begin{fDefinition}[Arbre binaire]
+Un arbre binaire $\mathcal{A}$ est un ensemble d'éléments de type
+Noeud\_Binaire vérifiant : 
+\begin{enumerate}[(i)]
+\item (Existence d'une racine unique) 
+$$\exists ! s\in\mathcal{A}, parent(s) = \emptyset$$
+\item (Fils gauche et droit distincts) 
+$$\forall s\in\mathcal{A}, s.f_g.id \not= s.f_d.id 
+\text{  ou  } s.f_g.id = s.f_d.id = -1 
+$$
+\item (Parent unique)
+$$\forall s\in\mathcal{A}, |parent(s)|\leq 1$$
+\end{enumerate}
+\end{fDefinition}
+}
+
+On pose :
+$$A_{\mathcal{A}} := 
+\{ (x,y) : x, y\in\mathcal{A}, 
+x\in parent(y) \text{ ou } y\in parent(x)\}
+$$
+On pose $G_{\mathcal{A}}$ le graphe non orienté associé à l'arbre
+binaire $\mathcal{A}$, défini par : $G_{\mathcal{A}} := (S, A)$, 
+tel qu'il existe une bijections $\sigma: S \rightarrow \mathcal{A}$
+ assurant :
+$\forall x, y\in S$, 
+$$
+(x,y)\in A \Rightarrow (\sigma(x), \sigma(y)) \in A_{\mathcal{A}}
+$$
+
+\blue{
+\begin{fTheorem}
+La fonction $\alpha:  A \rightarrow A_{\mathcal{A}}$ définie par : 
+$ (x, y) \mapsto (\sigma(x), \sigma(y))
+$
+est une bijection.
+\end{fTheorem}
+}
+
+\begin{proof}[Preuve]
+\begin{enumerate}
+\item $\alpha$ est injective. 
+$$\alpha(x,y) = \alpha(x', y') 
+	$$
+$$
+\iff
+(\sigma(x), \sigma(y)) = (\sigma(x'), \sigma(y'))
+	$$
+$$
+\iff
+\big(	\sigma(x) = \sigma(x') \text{ et } \sigma(y) = \sigma(y')  
+			\big)
+	$$
+$$
+\iff 
+\big(	x = x' \text{ et } y = y'  
+			\big)
+$$
+(en utilisant le fait que $\sigma$ est bijective donc en particulier injective).
+
+\item $\alpha$ est surjective.
+Soit $(x, y) \in A_{\mathcal{A}}$. 
+$\big(\sigma^{-1}(x) , \sigma^{-1}(y )\big)$ 
+est un antécédant de $(x, y)$.
+\end{enumerate}
+\end{proof}
+
+\blue{
+\begin{fDefinition}[Hauteur d'un noeud]
+Soit $\mathcal{A}$ un arbre binaire, la hauteur d'un noeud $s\in\mathcal{A}$, 
+notée $height(s)$, 
+est définie par : $\forall s\in\mathcal{A}$,  
+\begin{enumerate}[(i)]
+\item $height(s) = 0$ si $s$ est racine de $\mathcal{A}$ ;
+\item $height(s) = 0$ si $Null(s)$ ;
+\item $height(s) = height(s') +1 $, où $parent(s) = \{s'\}$, sinon.
+\end{enumerate}
+\end{fDefinition}
+}
+
+\blue{
+\begin{fTheorem}
+Le graphe non orienté associé à un arbre binaire est 
+connexe et sans cycle.
+\end{fTheorem}
+}
+
+% \begin{proof}[Idée de preuve]
+% Considérer le graphe orienté associé.
+% Démontrer la connexité et l'acyclicité du graphe orienté associé ; 
+% concernant l'acyclicité :
+% la racine ne peut être dans le cycle orienté ;
+% d'autre part un cycle implique l'existence de deux parents pour un noeud
+% -- le noeud appartenant au cycle de hauteur minimum.
+% En déduire la connexité et l'acyclicité du graphe non orienté associé
+% \end{proof}
+
+\blue{
+\begin{fDefinition}[ABR]
+Un arbre binaire de recherche (ABR) est soit un arbre vide ; soit un arbre binaire vérifiant,
+pour  tout noeud $s$ : 
+\begin{itemize}
+	\item[--] $\forall s' \in G(s), s'.val \leq s.val $ ;
+	\item[--] $\forall s' \in D(s), s.val < s'.val$ ;
+\end{itemize}
+où $G(s)$ (resp. $D(s)$) est le sous-arbre gauche (resp. droit) du noeud $s$.
+\end{fDefinition}
+}
+
+
+%%%
+\subsection{Recherche dans un ABR}
+
+\begin{algorithm}[H]
+\caption{\algo{recherche\_ABR} ($s\in\mathcal{A}$, $x\in V$ : valeur recherchée)}
+\begin{algorithmic}[1]
+\If{$Null(s)$}
+	\State\Return $\False$
+\ElsIf{$s.val = x$}
+	\State\Return $\True$
+\ElsIf{$s.val > x$}
+	\State\Return $\algo{recherche\_ABR}(s.f_g, x)$
+\Else
+	\State\Return $\textsc{recherche\_ABR}(s.f_d, x)$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(\log n)$ en moyenne.
+
+%%%
+\subsection{Parcours infixe dans un arbre binaire}
+
+\begin{algorithm}[H]
+\caption{\algo{infixe} ($s\in\mathcal{A}$)}
+\begin{algorithmic}[1]
+\State \textbf{\textup{if}} $Null(s)$ 
+	\textbf{\textup{then}} \textbf{\textup{ return}} \None \textbf{\textup{  end if}}
+\If{$ \Not Null(s) $}
+	\State $\algo{infixe}(s_g)$
+\EndIf
+\State $\print (s)$
+\If{$\Not Null(s_d) $}
+	\State $\algo{infixe}(s_d)$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.
+
+\blue{
+\begin{fTheorem}
+Le parcours infixe d'un ABR donne une séquence des noeuds triés selon l'ordre croissant des valeurs.
+\end{fTheorem}
+}
+
+\begin{proof}[Preuve] (Par récurrence sur la taille de l'ABR).
+Si $|\mathcal{A}| = 1$, alors la proposition est vraie.
+
+Supposons que, pour tout ABR de taille $m\leq k$, la proposition soit vraie.
+Considérons un ABR de taille $k+1$ ; alors la séquence affichée est
+de la forme :
+\begin{center}
+séquence affichée par $\algo{infixe}(s.f_g)$ ; $s$ ; 
+séquence affichée par $\algo{infixe}(s.f_d)$. 
+\end{center}
+Par définition d'un ABR, 
+\begin{itemize}
+\item[--]  $\forall s' \in G(s), s'.val \leq s.val $ ;
+\item[--] $\forall s' \in D(s), s.val < s'.val$.
+\end{itemize}
+D'autre part, l'hypothèse de récurrence nous assure que 
+la séquence affichée par $\algo{infixe}(s.f_g)$ 
+(resp. $\algo{infixe}(s.f_d)$) 
+est conforme à
+la proposition.
+\end{proof}
+

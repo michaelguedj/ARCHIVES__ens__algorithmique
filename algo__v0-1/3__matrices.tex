@@ -1,0 +1,74 @@
+
+
+
+%%%
+%%%
+\subsection{Afficher les éléments d'une matrice}
+\begin{algorithm}[H]
+\caption{\algo{afficher\_matrice} ($A$ : matrice $n\times m$)}
+\begin{algorithmic}[1]
+\For{$i \gets 0, ..., n-1$}	\green{\Comment{parcours sur les lignes}}
+	\For{$j \gets 0, ..., m-1$}	\green{\Comment{parcours sur les colonnes}}
+		\State \print($A_{i,j}$)
+	\EndFor
+	\State \print(saut de ligne)
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n\times m)$.
+
+\noindent
+Cas d'une matrice carré $n\times n$ : $O(n^2)$ (complexité linéaire !).
+
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
+\subsection{Additionner deux matrices}
+\begin{algorithm}[H]
+\caption{\algo{additionner} ($A, B$ : matrice $n\times m$)}
+\begin{algorithmic}[1]
+\State $C \gets$ matrice $n\times m$
+\For{$i \gets 0, ..., n-1$}
+	\For{$j \gets 0, ..., m-1$}
+		\State $C_{i, j}\gets A_{i,j} + B_{i,j}$
+	\EndFor
+\EndFor
+\State\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n\times m)$.
+
+
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
+\subsection{La matrice est-telle diagonale ?}
+
+Rappel : la matrice carré $n\times n$, soit $M$, est diagonale si :
+$$\forall i,j\in\{0, ..., n-1\}, 
+i\not=j \Rightarrow M_{i,j}=0$$
+
+\begin{algorithm}[H]
+\caption{\algo{est\_diagonale} ($M$ : matrice $n\times n$)}
+\begin{algorithmic}[1]
+\For{$i \gets 0, ..., n-1$}
+	\For{$j \gets 0, ..., n-1$}
+		\If{$i\not=j$ et $M_{i,j}\not=0$}
+			\State\Return $\False$
+		\EndIf
+	\EndFor
+\EndFor
+\State\Return $\True$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n^2)$.
+

@@ -1,0 +1,64 @@
+
+
+\subsection{Approximation asymptotique}
+\blue{
+\begin{fDefinition}[Notation grand O]
+Soient $f$ et $g$ deux fonctions de $\mathbb{N} \rightarrow \mathbb{R}^{+}$.
+$f \in O(g)$ si :
+\begin{itemize}
+\item[--] $\exists K \in\mathbb{R}^{*+}$ ;
+\item[--] $\exists n_0 \in \mathbb{N}$ ; 
+\end{itemize}
+et
+$$
+\forall n\geq n_0,~ f(n) \leq K. g(n)
+$$
+($f(n) \leq K. g(n)$ à partir d'un certain rang). 
+\end{fDefinition}
+}
+
+%\noindent
+\textbf{Exemples}
+\begin{itemize}
+\item[--] $7n-3 \in O(n)$
+\item[--] $7n-3 \in O(n^2)$
+\item[--] $987654321 + 10n^2 \in O(n^2)$
+\end{itemize}
+
+\noindent
+\textbf{Remarque}
+Le but est de trouver l'approximation la plus petite possible.
+
+
+%%%%
+%%%%
+%%%%
+%%%%
+%%%%
+\subsection{Complexités en temps classiques}
+\begin{tabular}{|l|l|l|}
+  \hline
+  \textbf{Complexité} & \textbf{Notation asymptotique} & \textbf{Exemple} \\
+  \hline
+  Logarithmique 	& $O(\log n)$			& Recherche dichotomique dans un tableau trié. \\
+  \hline
+  Linéaire 		& $O(n)$ 				& Recherche séquentielle dans un tableau. \\
+  \hline
+  Quasi-linéaire  & $O(n \log n)$ 		& Tri fusion. \\
+  \hline
+  Quadratique 	& $O(n^2)$ 			& Tri sélection; tri à bulles.\\
+  \hline
+  Polynomiale 	& $O(n^k), k\geq 0$	& $~$... \\
+  \hline
+  Exponentielle 	& $O(k^n), k>1$ 		& Algorithme récursif pour Fibonacci. \\
+  \hline
+  Factorielle 	& $O(n!)$ 			& Résolution des $n$-reines par \textit{backtracking}. \\
+  \hline
+\end{tabular}
+
+%%%%
+%%%%
+%\subsection{Comparaisons}
+%$$
+%\log n \ll n \ll n \log n \ll n^2 \ll n^3 \ll 2^n \ll n!
+%$$

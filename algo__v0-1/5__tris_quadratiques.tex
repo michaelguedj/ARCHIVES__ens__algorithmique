@@ -1,0 +1,209 @@
+
+
+\subsection{Algorithme d'échange}
+
+\begin{algorithm}[H]
+\caption{\algo{echanger}($t$ : tableau, $i,j$ : entiers)}
+\begin{algorithmic}[1]
+\State $tmp \gets t[i]$ 
+\State $t[i] \gets t[j]$ 
+\State $t[j] \gets tmp$ 
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\subsection{Tri par sélection}
+
+\begin{algorithm}[H]
+\caption{\algo{tri\_selection}($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\For{$i\gets 0, ..., n-2$}
+	\State $i_{min} \gets $ $\algo{indice\_min\_sous\_tab}(t, i, n-1)$
+	\State $\algo{echanger}(t, i, i_{min})$ 
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{\algo{indice\_min\_sous\_tab}($t$ : tableau, $a, b$ : entiers)}
+\label{indiceMin}
+\begin{algorithmic}[1]
+\State $i_{min} \gets a$
+\For{$i\gets a+1, ..., b$}
+	\If{$t[i] < t[i_{min}]$}
+		\State $i_{min} \gets i$
+	\EndIf
+\EndFor
+\State\Return $i_{min}$
+\end{algorithmic}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\blue{
+\begin{fTheorem}
+La complexité de $\algo{tri\_selection}$ est en $O(n^2)$.
+\end{fTheorem}
+}
+
+\blue{
+\begin{fTheorem}
+Le nombre de comparaisons de $\algo{tri\_selection}$ est en $O(n^2)$.
+\end{fTheorem}
+}
+
+\begin{proof}[Preuve]
+Calcul du nombre de comparaisons $\mC(n)$ 
+(ligne 3 de l'algorithme \ref{indiceMin}).
+$$
+\mC(n) = \sum_{i=0}^{n-2} \sum_{j=i+1}^{n-1} 1
+$$
+%
+$$
+\mC(n)
+ = \sum_{i=0}^{n-2} 
+								\Big(
+										(n-1) - (i+1) + 1 
+								\Big)
+$$
+%
+$$
+\mC(n)
+ = \sum_{i=0}^{n-2} 
+								\big(
+										n-1 - i-1 + 1 
+								\big)
+$$
+%
+$$
+\mC(n)
+ = \sum_{i=0}^{n-2} 
+								\big(
+										n-1 - i 
+								\big)
+$$
+%
+$$
+\mC(n) = 
+ \sum_{i=0}^{n-2} (n-1)
+-  \sum_{i=0}^{n-2} i
+$$
+%
+$$
+\mC(n) = 
+ (n-1) \sum_{i=0}^{n-2} 1
+-  \sum_{i=0}^{n-2} i
+$$
+%
+$$
+\mC(n) = 
+	(n-1)(n-1)
+	- \sum_{i=0}^{n-2} i 	
+$$
+%
+$$
+\mC(n) = 
+	(n-1)^2
+	- \sum_{i=0}^{n-2} i 	
+$$
+$$
+\mC(n) = 
+	(n-1)^2
+	- \frac{(n-2)(n-1)} {2}
+$$
+%
+$$
+\mC(n) = 
+	(n-1)
+	\Big(
+		(n-1)
+		-\frac{(n-2) } {2}
+	\Big)
+$$
+%
+$$
+\mC(n) = 
+	(n-1)
+	\Big(
+		\frac{2.(n-1) -(n-2) } {2}
+	\Big)
+$$
+%
+$$
+\mC(n) = 
+	(n-1)
+	\Big(
+		\frac{2n-2 - n+ 2 } {2}
+	\Big)
+$$
+%
+$$
+\mC(n) = 
+	(n-1)
+	\frac{n} {2}
+$$
+$$
+\mC(n) = 
+ 	\frac{n^2}{2}
+	-
+	\frac{n}{2} \in O(n^2)
+  	$$
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tri à bulles}
+
+\begin{algorithm}[H]
+\caption{\algo{tri\_bulles}($t$ : tableau, $n$ : taille du tableau)}
+\label{triBulles}
+\begin{algorithmic}[1]
+\For{$i \gets n-1, ..., 1$}
+	\For{$j \gets 0, ..., i-1$}
+		\If{$t[j+1] < t[j]$}
+			\State $\algo{echanger}(t, j+1, j)$
+		\EndIf
+	\EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\blue{
+\begin{fTheorem}
+La complexité de $\algo{tri\_bulles}$ est en $O(n^2)$.
+\end{fTheorem}
+}
+
+\blue{
+\begin{fTheorem}
+Le nombre de comparaisons de $\algo{tri\_bulles}$ est en $O(n^2)$.
+\end{fTheorem}
+}
+
+
+\begin{proof}[Preuve]
+Calcul du nombre de comparaisons $\mC(n)$ (ligne 4 de Algorithme \ref{triBulles}).
+$$
+\mC(n) = 
+	\sum_{i=n-1}^{1} \sum_{j=0}^{i-1} 1 
+ =
+ 	\sum_{i=n-1}^{1} (i-1-0+1) 
+ = 
+  	\sum_{i=n-1}^{1} i 
+$$
+%
+$$
+\mC(n) = 
+   	\frac{(n-1+1) (n-1)}{2}
+ =
+    \frac{n (n-1)}{2}
+ = \frac{n^2}{2} - \frac{n}{2} \in O(n^2)
+  	$$
+\end{proof}
+

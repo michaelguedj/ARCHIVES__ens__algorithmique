@@ -1,0 +1,124 @@
+
+
+
+
+
+\begin{algorithm}[H]
+\caption{\algo{dicho\_init}($t$ : tableau, $n$ : taille du tableau, $x$ : élément)}
+\begin{algorithmic}[1]
+\State $d \gets 0$ 
+\State $f \gets n-1$ 
+\State\Return $\algo{dicho}(t, d, f, x)$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{\algo{dicho}($t$ : tableau, $d,f$ : indices, $x$ : élément)}
+\label{dicho}
+\begin{algorithmic}[1]
+\State \textbf{if} $d > f$ \textbf{then} \Return $-1$ \textbf{end if}
+	\green{\Comment{Non trouvé.}}
+
+\If{$f=d$}
+	\State \textbf{if} $t[d] = x$ \textbf{then} \Return $d$  
+	\textbf{else} \Return $-1$ \textbf{end if} 
+\EndIf
+
+\State $m \gets  E(\frac{d+f}{2})$	\green{\Comment{Partie entière.}}
+
+\If{$ t[m] = x $}
+	\State\Return $m$
+\EndIf
+
+\If{$t[m] < x $}
+	\State\Return $\algo{dicho}(t, m+1, f, x)$
+\Else
+	\State\Return $\algo{dicho}(t, d, m-1, x)$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\blue{
+\begin{fTheorem}
+La complexité de $\algo{dicho}$ est en $O(\log n)$.
+\end{fTheorem}
+}
+
+\begin{proof}[Preuve (d'approximation)]
+Soit $\mC(n)$ le nombre de comparaisons pour une instance de taille $n$.
+On a, 
+$$
+\mC(n) = \gamma + \mC(\frac{n}{2}) 
+	~~~~ ( \gamma \text{ constante} ) 
+	$$
+La deuxième instance appelée vérifie :
+$$
+\mC(\frac{n}{2}) = \gamma + \mC(\frac{n}{4})
+	$$
+D'où, 
+$$
+\mC(n) = \gamma + \mC(\frac{n}{2}) 
+		= \gamma + \Big( \gamma + \mC(\frac{n}{4}) \Big)
+		= 2\gamma + \mC(\frac{n}{4})
+	$$
+Soit, 
+$$
+\underline{\mC(n) = 2\gamma +  \mC(\frac{n}{2^2})
+}
+	$$
+La troisième instance appelée vérifie :
+$$
+\mC(\frac{n}{2^2}) = \gamma +  \mC(\frac{n}{2^3})
+	$$
+D'où, 
+$$
+\underline{\mC(n) = 3\gamma +  \mC(\frac{n}{2^3})
+}
+	$$
+En itérant, $\mC(n)$ s'écrit : 
+$$
+\underline{
+\mC(n) = k\gamma +  \mC(\frac{n}{2^k})
+}
+	$$
+Où $k$ correspond au $(k+1)$-ième appel récursif.
+
+On a$^*$ :
+$$
+		\frac{n}{2^k} = 1 
+	\Rightarrow
+		\underline{ \mC(\frac{n}{2^k}) = \alpha \in\mathbb{N}}
+	$$
+Et : 
+$$
+		\frac{n}{2^k} = 1 
+	\iff
+		n = 2^k
+	\iff 
+		\underline{ \log_2 n = k}
+	$$
+$C(n)$ s'écrit alors :
+$$
+	\mC(n) = k\gamma +  \mC(\frac{n}{2^k})
+	= 
+		\underline{\log_2 (n) \gamma + \alpha \in O(\log n)}
+	$$
+\end{proof}
+
+$(^*)$
+Le cas $\frac{n}{2^k}<0$ 
+(i.e. le cas d'une taille négative d'instance),
+ prévu par l'algorithme
+(ligne 1 de l'algorithme \ref{dicho}),
+ est laissé en exercice.
+Vous devriez trouver (si $n>0$) :
+$$
+\frac{n}{2^k}<0 \Rightarrow
+ \frac{n}{2^{k-1}}=2
+	\iff n = 2.2^{k-1} = 2^k
+$$
+(Considérer l'appel parent).

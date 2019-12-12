@@ -1,0 +1,130 @@
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+%%% ----------------------------------------------------------
+%%% Addings
+\input{../latex_additions/__technical_additions}
+%%% End of the addings
+%%% ----------------------------------------------------------
+
+
+
+
+\title{Algorithmique\\ -- version 0.1}
+\date{\vspace{-5ex}}
+\author{Dr M. GUEDJ}
+
+\begin{document}
+
+
+
+\renewcommand{\contentsname}{Table des Matières}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LICENCE CC %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{center}
+\includegraphics[scale=0.5]{licence/licence_cc.png}
+
+\begin{small}
+Algorithmique de Dr Michaël GUEDJ est mis à disposition selon les termes de la licence Creative Commons Attribution 4.0 International.
+Fondé(e) sur une œuvre à 
+\url{https://github.com/michaelguedj/ens__algorithmique}.
+\end{small}
+\end{center}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\tableofcontents
+%%%
+%%%
+
+\newpage
+\section{Algorithmes sur tableaux}
+\input{1__tableaux}
+
+%\newpage
+%\section{Liste cha\^inée, pile et file }
+%\input{2__memo___liste_chainee_pile_file}
+
+\newpage
+\section{Algorithmes sur matrices}
+\input{3__matrices}
+
+\newpage
+\section{Complexité en temps (cas le pire)}
+\input{4__memo_complexite}
+
+\newpage
+\section{Tris quadratiques }
+\input{5__tris_quadratiques}
+
+\newpage
+\section{Récursivité}
+\input{6__recursivite}
+
+%-----------------------------------------
+\newpage
+\section{Recherche Dichotomique }
+\input{7__recherche_dicho}
+
+%-----------------------------------------
+\newpage
+\section{Tri Fusion }
+\input{8__tri_fusion}
+
+%-----------------------------------------
+\newpage
+\section{Arbres Binaires et ABR}
+\input{9__arbres_binaires}
+
+\newpage
+\section{Représentation des graphes}
+\input{10__representation_des_graphes}
+
+\newpage
+\section{Parcours en largeur de graphes
+\\ (\textit{Breadth First Search}) }
+\input{11__bfs}
+
+\newpage
+\section{Problème de l'arrêt}
+\input{12__pb_arret}
+
+\newpage
+\section{Approche des problèmes d’optimisation}
+\input{13__intro_pb_optimisation}
+
+%-----------------------------------------
+%\newpage
+%\section{Résolution exacte par backtracking}
+%A VENIR
+%\input{14__backtracking}
+
+\newpage
+\section{Algorithmes de type glouton}
+\input{15__algorithmes_gloutons}
+
+\newpage
+\section{Problème de la somme du sous-ensemble 
+\\ (\textit{Subset Sum Problem})}
+\input{16__ssp}
+
+%-----------------------------------------
+\newpage
+\section{Problème de la coloration de graphe 
+\\ (\textit{Graph Coloring Problem})}
+\input{17__coloration_graphe}
+
+\newpage
+\section{Problème du voyageur de commerce 
+\\(\textit{Travelling Salesman Problem})}
+\input{18__tsp}
+
+\newpage
+\section{Algorithmes génétiques}
+\input{19__ag}
+
+\end{document}

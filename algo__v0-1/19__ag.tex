@@ -1,0 +1,42 @@
+
+
+On cherche à maximiser $f : E \rightarrow \mathbb{R}$ ; où  $E$  est fini.
+
+Exemple (pour un entier $n$) :  
+\begin{itemize}
+	\item $E=\texttt{float}^n$ ;
+	\item $E=\mathbb{B}^n$ ;
+	\item $E=\{x_1, ..., x_k\}^n$  (pour un entier $k$) ;
+	\item $E=S_n$ (l'ensemble des permutations de \{1, ..., n\}).
+\end{itemize}
+
+
+\begin{algorithm}[H]
+\caption{\algo{algorithme\_genetique}(
+	$n$ : taille d'un individu, 
+	$\newline$
+	$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ 
+	$p$ : nombre d'individus, ...)}
+\begin{algorithmic}[1]
+\State $P \gets$ Population initiale
+\State 	$res \gets \Null$
+			\green{\Comment{En considérant $f(\Null) = - \infty$}}
+\While{$\Not$(Critère Fin)}
+	\State Calculer la valeur de fitness de chaque individu   
+			\green{\Comment{i.e. $f(p), \forall p\in P$}}
+	\State $best \gets $ le meilleur individu de $P$ 
+			\green{\Comment{Au sens de la maximisation de $f$}}
+  	\If{ $f(best) > f(res)$}
+		\State $res \gets best$
+	\EndIf
+	\State $P \gets selection(P)$
+	\State $P_{new} \gets reproduction(P)$
+	\State $P_{new} \gets mutation(P_{new})$
+	\State $P \gets P_{new}$
+\EndWhile
+\State\Return $res$
+\end{algorithmic}
+\end{algorithm}
+
+(Les phases de $selection$ et de $reproduction$
+peuvent être regroupées en une procédure).

@@ -1,0 +1,73 @@
+
+%%%
+\subsection{Définition du problème}
+%%%
+%%%
+\blue{
+\begin{fDefinition}[Cycle hamiltonien]
+Un cycle hamiltonien (d'un graphe)
+est un cycle passant par tous les sommets du graphe, une fois et une seule.
+\end{fDefinition}
+}
+
+\blue{
+\begin{fDefinition}[Problème du voyageur de commerce]
+$~$
+\begin{itemize} 
+	\item \textup{Entrée.}
+		\begin{itemize}
+			\item[] Un graphe $G=(S, A, cost)$, tel que : 
+			\begin{itemize}
+				\item[--] $G$ est non orienté ; 
+				\item[--] $G$ est complet ;
+				\item[--] Les arcs de $G$ sont valués par la fonction $cost : A\rightarrow \mathbb{R}$.
+			\end{itemize}
+		\end{itemize}
+	\item \textup{Problème.}
+		\begin{itemize}
+			\item[] Trouver le cycle hamiltonien ayant le coût le plus faible.
+		\end{itemize}
+\end{itemize}
+\end{fDefinition}
+}
+
+\blue{
+\begin{fTheorem}
+Le problème du voyageur de commerce est NP-hard. 
+\end{fTheorem}
+}
+
+\begin{proof}
+Admis.
+\end{proof}
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
+\subsection{Heuristique : algorithme du plus proche voisin}
+%%%
+%%%
+
+\begin{algorithm}[H]
+\caption{$\algo{nearest\_neighbour}( G=(S, A, cost) )$}
+\begin{algorithmic}[1]
+\State $todo \gets \{\}$
+\State $res \gets $ Liste vide
+\State $s_0 \gets $ choisir un sommet arbitraire de $G$
+\State $todo\gets G-\{s_0\}$
+\State $res.\append(s_0)$
+\State $s\gets s_0$
+\While{$todo\not=\{\}$}
+	\State $s' \gets$ le sommet le plus proche de $s$
+	\State $todo\gets todo - \{s'\}$
+	\State $res.\append(s')$
+	\State $s\gets s'$
+\EndWhile
+\State\Return $res.\append(s_0)$
+\end{algorithmic}
+\end{algorithm}
+
+%Complexité : $O(n^2)$ ???
+

@@ -1,0 +1,23 @@
+
+
+
+\begin{algorithm}[H]
+\caption{$\algo{BFS}( G=(S, \Succ), s_0 )$}
+\begin{algorithmic}[1]
+\State $done \gets $ Liste vide
+\State $todo\gets $ File vide
+\State $todo.\enfiler(s_0)$
+\State $done.\append(s_0)$
+\While{$todo$ non vide}
+	\State $s\gets todo.\defiler()$
+	\For{$s'\in \Succ(s)$}
+		\If{$s' \notin done$}
+			\State $todo.\enfiler(s')$
+			\State $done.\append(s')$
+		\EndIf
+	\EndFor
+\EndWhile
+\State\Return $done$
+\end{algorithmic}
+\end{algorithm}
+

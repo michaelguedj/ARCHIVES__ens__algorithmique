@@ -1,0 +1,62 @@
+
+%%%
+\subsection{Définition du problème}
+%%%
+%%%
+\blue{
+\begin{fDefinition}[Problème de la somme du sous-ensemble]
+$~$
+\begin{itemize} 
+	\item \textup{Entrée.}
+		\begin{itemize}
+			\item Un tableau $t$, de taille $n$, à valeurs entières.
+			\item Une capacité $c\in \mathbb{N}$.
+		\end{itemize}
+	\item \textup{Problème.}
+		\begin{itemize}
+			\item[]Trouver $k$ indices de $t$,  distincts, soient $i_1, ..., i_k$, tels que la somme : 
+			$$t[i_1] + ... + t[i_k]$$
+			Approche la capacité $c$, sans la dépasser.
+		\end{itemize}
+\end{itemize}
+\end{fDefinition}
+}
+
+\blue{
+\begin{fTheorem}
+Le problème de la somme du sous-ensemble
+est NP-hard. 
+\end{fTheorem}
+}
+
+\begin{proof}
+Admis.
+\end{proof}
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
+\subsection{Heuristique gloutonne}
+%%%
+%%%
+
+\begin{algorithm}[H]
+\caption{$\algo{greedy}(t, n, c)$}
+\begin{algorithmic}[1]
+\State trier $t$ selon l'ordre décroissant
+\State $res \gets $ Liste vide
+\State $val \gets 0$
+\For{$i \gets 0, ..., n-1$}
+	\If{$val + t[i] \leq c$}
+		\State $res.\append(i)$	
+		\State $val \gets val + t[i]$
+	\EndIf
+\EndFor
+\State\Return $res$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n . \log n)$.
+

@@ -1,0 +1,121 @@
+
+
+
+%%%
+\subsection{Un tableau est-il vide ?}
+\begin{algorithm}[H]
+\caption{$\algo{est\_vide}$ ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\If{$n=0$}
+	\State\Return $\True$
+\Else
+	\State\Return $\False$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(1)$.
+
+
+%%%
+\subsection{Afficher les éléments d'un tableau}
+\begin{algorithm}[H]
+\caption{\algo{afficher\_tableau} ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\For{$i \gets 0, ..., n-1$}
+	\State \print($t[i]$)
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.
+
+
+%%%
+\subsection{Afficher les éléments positifs d'un tableau}
+\begin{algorithm}[H]
+\caption{\algo{afficher\_positifs} ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\For{$i \gets 0, ..., n-1$}
+	\If{$t[i]\geq 0$}
+		\State \print($t[i]$)
+	\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.
+
+
+%%%
+\subsection{Retourner l'éléments maximum d'un tableau}
+\begin{algorithm}[H]
+\caption{\algo{maximum} ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\State \green{\Comment{On suppose $n>0$}}
+\State $max \gets t[0]$ 
+\For{$i \gets 1, ..., n-1$}
+	\If{$t[i]\geq max$}
+		\State $max \gets t[i]$
+	\EndIf
+\EndFor
+\State\Return $max$
+\end{algorithmic}
+\end{algorithm}
+
+
+Complexité : $O(n)$.
+
+
+%%%
+\subsection{Retourner l'indice de l'éléments maximum d'un tableau}
+\begin{algorithm}[H]
+\caption{\algo{inidice\_maximum} ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\State \green{\Comment{On suppose $n>0$}}
+\State $max \gets t[0]$ 
+\State $iMax \gets 0$ 
+\For{$i \gets 1, ..., n-1$}
+	\If{$t[i]\geq max$}
+		\State $max \gets t[i]$
+		\State $iMax \gets i$
+	\EndIf
+\EndFor
+\State\Return $iMax$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.
+
+
+%%%
+\subsection{Retourner la somme des éléments d'un tableau}
+\begin{algorithm}[H]
+\caption{\algo{somme} ($t$ : tableau, $n$ : taille du tableau)}
+\begin{algorithmic}[1]
+\State $res \gets 0$ 
+\For{$i \gets 0, ..., n-1$}
+	\State $res \gets res + t[i]$
+\EndFor
+\State\Return $res$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.
+
+
+%%%
+\subsection{Rechercher un élément dans un tableau}
+\begin{algorithm}[H]
+\caption{\algo{recherche} ($t$ : tableau, $n$ : taille du tableau, $x$ : élément)}
+\begin{algorithmic}[1]
+\For{$i \gets 0, ..., n-1$}
+	\If{$t[i] = x$}
+		\State\Return $\True$
+	\EndIf
+\EndFor
+\State\Return $\False$
+\end{algorithmic}
+\end{algorithm}
+
+Complexité : $O(n)$.

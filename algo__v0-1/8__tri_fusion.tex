@@ -1,0 +1,159 @@
+
+
+\begin{algorithm}[H]
+\caption{\algo{tri\_fusion}($lst$ : liste de taille $n$)}
+\begin{algorithmic}[1]
+\State\textbf{if} $n=1$
+	\Return $lst$
+\textbf{end if}
+\State $m = E(n/2)$ \green{\Comment{Partie entière.}}
+\State $lst_1 \gets \algo{tri\_fusion}(lst[0\rightarrow m-1])$
+\State $lst_2 \gets \algo{tri\_fusion}(lst[m\rightarrow n-1])$
+\State \Return $\algo{fusion}(lst_1, lst_2)$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{\algo{fusion}($lst_1$ : liste de taille $n_1$, 
+				      $lst_2$ : liste de taille $n_2$)}
+\label{fusion}
+\begin{algorithmic}[1]
+\State $res\gets $ Liste vide
+\While{non ($lst_1$ vide et $lst_2$ vide)}
+	\If{$lst_1$ est vide}
+		\State\Return $res + lst_2$
+    \EndIf
+	\If{$lst_2$ est vide}
+		\State\Return $res + lst_1$
+   \EndIf
+	\If{$ \head(lst_1) \leq \head(lst_2)$}
+		\State $res\gets res + [\head(lst_1)]$
+		\State $lst_1 \gets \tail(lst_1)$
+	\Else
+		\State $res\gets res + [\head(lst_2)]$
+		\State $lst_2 \gets \tail(lst_2)$	
+	\EndIf
+\EndWhile
+\State\Return $res$
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Exercice.}
+La ligne 17 de l'algorithme \ref{fusion} n'est jamais atteinte.
+Pourquoi ?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\blue{
+\begin{fTheorem}
+La complexité de $\algo{tri\_fusion}$ est en $O(n\log n)$.
+\end{fTheorem}
+}
+
+\begin{proof}[Preuve (réduite aux cas des puissances de deux)]
+%On pose $\mC(x)$ le nombre de comparaisons pour une liste
+%de taille $x$.
+Soit $p$ une puissance de $2$.
+
+$$
+\mC(p) = 1 + 2. \mC(\frac{p}{2}) + \gamma.p
+$$
+Où $\gamma$ est une constante.
+On a de même :
+$$
+\mC(\frac{p}{2}) = 1 + 2. \mC(\frac{p}{4}) + \gamma.\frac{p}{2}
+$$
+Soit : 
+$$
+\mC(p) = 1 + 2 (1 + 2. \mC(\frac{p}{4}) + \gamma.\frac{p}{2}) + \gamma.p
+$$
+$$
+\mC(p) = 1 + 2 + 4. \mC(\frac{p}{4}) + \gamma.p + \gamma.p
+$$
+$$
+\mC(p) = 4. \mC(\frac{p}{4}) + 2\gamma.p + 3
+$$
+$$
+\underline{\mC(p) = 2^2 . \mC(\frac{p}{2^2}) + 2\gamma.p + (2+1)}
+$$
+%
+$$
+\mC(\frac{p}{2^2}) = 1 + 2. \mC(\frac{p}{2^3}) + \gamma.\frac{p}{2^2}
+$$
+%
+$$
+\mC(p) = 2^2 . (1 + 2. \mC(\frac{p}{2^3}) + \gamma.\frac{p}{2^2}) + 2\gamma.p + (2+1)
+$$
+$$
+\mC(p) =  2^2 + 2^2.2. \mC(\frac{p}{2^3}) + \gamma.p + 2\gamma.p + (2+1)
+$$
+$$
+\underline{\mC(p) = 2^3. \mC(\frac{p}{2^3}) + 3\gamma.p 
+	+ (2^2+2+1)}
+$$
+$$
+\mC(\frac{p}{2^3}) =
+	1 + 2. \mC(\frac{p}{2^4}) + \gamma. \frac{p}{2^3}
+$$
+$$
+\mC(p) = 2^3. (1 + 2. \mC(\frac{p}{2^4}) + \gamma. \frac{p}{2^3}) + 3\gamma.p 
+	+ (2^2+2+1)
+$$
+$$
+\mC(p) = 2^3 + 2^3.2. \mC(\frac{p}{2^4}) + 2^3.\gamma. \frac{p}{2^3} + 3\gamma.p 
+	+ (2^2+2+1)
+$$
+$$
+\mC(p) = 2^3 + 2^4. \mC(\frac{p}{2^4}) + \gamma.p + 3\gamma.p 
+	+ (2^2+2+1)
+$$
+$$
+\underline{
+\mC(p) = 2^4. \mC(\frac{p}{2^4}) + 4\gamma.p 
+	+ (2^3+2^2+2+1)}
+$$
+
+En itérant, 
+$$
+\underline{
+\mC(p) = 2^t. \mC(\frac{p}{2^t}) + t\gamma.p 
+	+ (2^t+...+2^2+2+1)}
+$$
+
+On a :
+$$
+2^t+...+2^2+2+1 = 2^{t+1} - 1
+$$
+
+D'où, 
+$$
+\underline{
+\mC(p) = 2^t. \mC(\frac{p}{2^t}) + t\gamma.p 
+	+ 2^{t+1}-1}
+$$
+
+On a :
+$$
+\frac{p}{2^t} = 1 \iff p = 2^t \iff t = \log_2 p
+$$
+Et $\mC(1) = 1$ ; d'où :
+$$
+\mC(p) = 2^{\log_2 p}. 1 + \log_2( p) \gamma.p 
+	+ 2^{\log_2 (p)+1}-1
+$$
+$$
+\mC(p) = p + p.\log_2( p).\gamma 
+	+ 2^{\log_2 (p)}.2+-1
+$$
+$$
+\mC(p) = p + p.\log_2( p).\gamma 
+	+ 2.p -1
+$$
+$$
+\underline{\mC(p) = 
+p.\log_2( p).\gamma+ 3.p -1} \in O(p\log p)
+$$
+
+\end{proof}
+

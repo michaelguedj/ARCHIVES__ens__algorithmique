@@ -1,0 +1,46 @@
+
+
+Nous considérons une veille radio que l’on trouve dans une brocante ; 
+elle comporte une molette : $A$ ; et 3 boutons : $B$, $C$ et $D$.
+
+\begin{itemize}
+\item	$A$ permet de capter des fréquences (100 fréquences disponibles) ; 
+\item	$B$, $C$ et $D$ sont trois boutons qui peuvent prendre 10 valeurs chacune 
+	-- mais dont on ne connait la signification.
+\end{itemize}
+
+Une solution est la donnée d’un quadruplet $(a, b, c, d)$ 
+où $a$, $b$, $c$ et $d$ indiquent des positions, 
+de la molette
+et des différents boutons.
+
+Au total : $100 \times 10 \times 10 \times 10 = 100~000$ solutions possibles.
+
+Le but est de trouver une station diffusant une chanson que l’on aime bien, et 
+avec une bonne qualité de diffusion.
+
+Pour chaque solution, i.e. chaque possibilité de quadruplet, on donne une note.
+
+
+\subsubsection*{Exemple de notation.}
+
+On entend :
+\begin{itemize}
+\item	Seulement des bruits de grésillement $\rightarrow 0/20$ ;
+\item	Des voix, avec beaucoup de grésillement $\rightarrow 5/20$ ;
+\item	Une chanson avec grésillement $\rightarrow 12/20$ ;
+\item	Des voix ; avec bonne qualité d’écoute $\rightarrow 14/20$ ;
+\item	Une chanson « sympathique » ; avec bonne qualité d’écoute $\rightarrow 17/20$ ;
+\item	Une chanson que l’on aime davantage ; avec bonne qualité d’écoute $\rightarrow 19/20$.
+\end{itemize}
+
+Nous nous faisons face à un problème d’\textbf{optimisation} ; 
+il s’agit, en effet, de trouver une solution qui \textbf{maximise} la note.
+
+Etant donné le nombre de solutions possibles 
+ ; on utilise alors une heuristique de résolution.
+(Tester 100 000 configurations possibles n’est pas acceptable pour un humain).
+
+
+
+
